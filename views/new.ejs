@@ -1,0 +1,19 @@
+<% include ./partials/boilerplate %>
+  <div class="container-new">
+  <form class="addform" action="/todo" method="post">
+    <div>
+    Title<br>
+    <input type="text" placeholder="title" name="title">
+    </div>
+    <div>
+    Category<br>
+    <input type="text" placeholder="category" name="category">
+    </div>
+    <div>
+    Description<br>
+    <textarea name="description"></textarea>
+    </div>
+    <input type="submit" value="Add it!">
+  </form>
+  </div>
+<% include ./partials/end %>

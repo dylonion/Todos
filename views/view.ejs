@@ -1,0 +1,22 @@
+<% include ./partials/boilerplate %>
+    <button id="add"><a href="/todo/new">Add a Todo!</a></button>
+    <% todo.forEach(atodo => { %>
+        <div class="container-view">
+            <div class="todo">
+                <span><%= atodo.title %></span>
+                <span class="status"><%= atodo.status %></span>
+            </div>
+            <div class="links">
+                <p><%= atodo.category %></p>
+                <button class="info"><a href="/todo/<%= atodo.id %>">info</a></button>
+                <button class="edit">edit</button>
+                <form class="delete" action="/todo/<%= atodo.id%>?_method=DELETE" method="POST">
+                    <button class="delete" type="submit">delete</button>
+                </form>
+            </div>
+        </div>
+    <% }) %>
+<% include ./partials/end %>
+
+
+

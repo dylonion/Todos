@@ -1,0 +1,16 @@
+<% include ./partials/boilerplate %>
+<div class="container-view">
+            <div class="todo">
+                <span><%= todo.title %></span>
+                <span class="status"><%= todo.status %></span>
+                <div class="description"><%= todo.description %></div>
+            </div>
+            <div class="links">
+                <p><%= todo.category %></p>
+                <button class="edit">edit</button>
+                <form class="delete" action="/todo/<%= todo.id%>?_method=DELETE" method="POST">
+                    <button class="delete" type="submit">delete</button>
+                </form>
+            </div>
+        </div>
+<% include ./partials/end %>
