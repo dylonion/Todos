@@ -2,8 +2,12 @@ const db = require('../db/config');
 
 const Todo = {};
 
-Todo.findAll = () => {
-  return db.query('SELECT * FROM todo');
+Todo.findAll = (id) => {
+  return db.query(`
+    SELECT *
+    FROM todo
+    WHERE user_id = $1
+  `, [id]);
 };
 
 Todo.findById = (id) => {
@@ -20,7 +24,7 @@ Todo.create = (Todo) => {
     (title, category, description, user_id, status)
     VALUES ($1, $2, $3, $4, 'incomplete')
     RETURNING *
-  `, [Todo.title, Todo.category, Todo.description, parseInt(Todo.user)]);
+  `, [Todo.title, Todo.category, Todo.description, Todo.user_id]);
 };
 
 Todo.update = (Todo, id) => {

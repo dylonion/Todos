@@ -3,7 +3,7 @@ const Todo = require('../models/todo');
 const TodoController = {};
 
 TodoController.index = (req, res) => {
-  Todo.findAll()
+  Todo.findAll(req.user.id)
     .then(todo => {
       res.render('view',{
           todo:todo
@@ -38,7 +38,7 @@ TodoController.create = (req, res) => {
       title: req.body.title,
       category: req.body.category,
       description: req.body.description,
-      user:parseInt(req.body.user)
+      user_id:parseInt(req.user.id)
     }).then(todo => {
       res.redirect(`/todo/${todo.id}`);
     })
