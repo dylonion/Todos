@@ -70,7 +70,7 @@ a {
   letter-spacing: .5px;
   cursor: default;
 }
-.container button {
+#main-button, #add {
   padding:10px;
   background-color: #b9e6b9;
   border-radius: 5px;
@@ -86,30 +86,33 @@ a {
   margin: 10px 0;
   background-color: white;
   width:300px;
+  border-radius: 3px;
 }
-.container-view button {
+/*.container-view button {
   margin:3px 2px;
   padding:3px;
   box-shadow: none;
   border-radius: 0;
-}
-.container-view button:hover {
+}*/
+/*.container-view button:hover {
   box-shadow: 2px 2px 2px grey;
-}
+}*/
 .container-view .links {
   display: flex;
   justify-content: space-between;
-  border:1px solid black;
-  padding: 0 10px;
+  padding: 10px;
   color:#4e4e4e;
+  border-bottom-radius: 3px;
+  background-color: #9fc1ff;
+}
+i {
+  cursor: pointer;
 }
 .container-view .links p {
   align-self: center;
 }
 .todo {
-  padding:5px;
-  border:1px solid black;
-  border-bottom: none;
+  padding:10px;
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
@@ -161,9 +164,8 @@ textarea {
   margin:0;
 }
 .not-done {
-  background-color: red !important;
-  color:white;
+  color:red;
 }
 .done {
-  background-color: #b9e6b9 !important;
+  color:green;
 }

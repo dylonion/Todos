@@ -6,17 +6,19 @@
                 <div style="align-self:center;"><%= atodo.title %></div>
                 <form action="/todo/status/<%= atodo.id%>?_method=PUT" method="POST">
                     <input type="hidden" value="<%= (atodo.status === 'complete' ? 'incomplete' : 'complete')%>" name="status">
-                    <button class="status <%= (atodo.status === 'complete' ? 'done' : 'not-done') %>"><%= atodo.status%></button>
+                    <button class="status <%= (atodo.status === 'complete' ? 'done' : 'not-done') %>"><i class="fa <%= atodo.status === 'complete'? 'fa-check-circle-o' : 'fa-dot-circle-o' %>" aria-hidden="true"></i></button>
                 </form>
             </div>
             <div class="description nodisplay"><%= atodo.description %></div>
             <div class="links">
                 <p><%= atodo.category %></p>
-                <button class="info"><a href="/todo/<%= atodo.id %>">info</a></button>
-                <button class="edit"><a href="/todo/<%= atodo.id %>?edit=y">edit</a></button>
-                <form class="delete" action="/todo/<%= atodo.id%>?_method=DELETE" method="POST">
-                    <button class="delete" type="submit">delete</button>
-                </form>
+                <div>
+                    <a style="position:relative; top: 2px;" href="/todo/<%= atodo.id %>"><i class="fa fa-plus-square-o" aria-hidden="true"></i></a>
+                    <a href="/todo/<%= atodo.id %>?edit=y"><i class="fa fa-pencil edit-button" aria-hidden="true"></i></a>
+                    <form class="delete" action="/todo/<%= atodo.id%>?_method=DELETE" method="POST">
+                        <button class="delete" type="submit"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                    </form>
+                </div>
             </div>
         </div>
     <% }) %>

@@ -4,16 +4,18 @@
         <div style="align-self:center;"><%= todo.title %></div>
         <form action="/todo/status/<%= todo.id%>?_method=PUT" method="POST">
             <input type="hidden" value="<%= (todo.status === 'complete' ? 'incomplete' : 'complete')%>" name="status">
-            <button class="status <%= (todo.status === 'complete' ? 'done' : 'not-done') %>"><%= todo.status%></button>
+            <button class="status <%= (todo.status === 'complete' ? 'done' : 'not-done') %>"><i class="fa <%= todo.status === 'complete'? 'fa-check-circle-o' : 'fa-dot-circle-o' %>" aria-hidden="true"></i></button>
         </form>
         <div class="description"><%= todo.description %></div>
     </div>
     <div class="links">
         <p><%= todo.category %></p>
-        <button class="edit-button">edit</button>
+        <div>
+        <i class="fa fa-pencil edit-button" aria-hidden="true"></i>
         <form class="delete" action="/todo/<%= todo.id%>?_method=DELETE" method="POST">
-            <button class="delete" type="submit">delete</button>
+            <button type="submit"><i class="fa fa-trash" aria-hidden="true"></i></button>
         </form>
+        </div>
     </div>
 </div>
 <div class="container-view edit <%= (typeof(todo.showedit) !== 'undefined' ? '' : 'nodisplay') %>">
