@@ -20,6 +20,10 @@ TodoController.show = (req, res) => {
   }else{
     Todo.findById(req.params.id)
     .then(todo => {
+      if(req.query.edit === "y"){
+        console.log('req query edit',req.query.edit);
+        todo.showedit = '';
+      }
       res.render('show', {todo});
     }).catch(err => {
       console.log(err);
@@ -34,11 +38,9 @@ TodoController.create = (req, res) => {
       title: req.body.title,
       category: req.body.category,
       description: req.body.description,
-      user:req.body.user,
-      status: req.body.status,
-      origintime: Date.now()
+      user:parseInt(req.body.user)
     }).then(todo => {
-      res.redirect(`/todo/${Todo.id}`);
+      res.redirect(`/todo/${todo.id}`);
     })
     .catch(err => {
       console.log(err);
@@ -51,15 +53,11 @@ TodoController.update = (req, res) => {
     title: req.body.title,
     category: req.body.category,
     description: req.body.description,
-    user:req.body.user,
+    user_id:req.user.id,
     status: req.body.status,
-    origintime: req.body.origintime
-  }, req.params.id).then(todo => {
-    res.json({
-      message: 'OK',
-      todo: todo,
-    });
-  }).catch(err => {
+    }, req.params.id).then(todo => {
+      res.redirect(`/todo/${todo.id}`);
+    }).catch(err => {
     console.log(err);
     res.status(500).json({
       message: 'Update failed',
@@ -67,7 +65,19 @@ TodoController.update = (req, res) => {
     });
   });
 };
-
+TodoController.updateStatus = (req, res) => {
+  Todo.updateStatus({
+    status: req.body.status
+  }, req.params.id).then(todo => {
+      res.redirect(`/todo/${todo.id}`);
+    }).catch(err => {
+    console.log(err);
+    res.status(500).json({
+      message: 'Update failed',
+      error: err,
+    });
+  });
+}
 TodoController.delete = (req, res) => {
   Todo.destroy(req.params.id)
     .then(() => {

@@ -1,16 +1,42 @@
 <% include ./partials/boilerplate %>
 <div class="container-view">
-            <div class="todo">
-                <span><%= todo.title %></span>
-                <span class="status"><%= todo.status %></span>
-                <div class="description"><%= todo.description %></div>
-            </div>
-            <div class="links">
-                <p><%= todo.category %></p>
-                <button class="edit">edit</button>
-                <form class="delete" action="/todo/<%= todo.id%>?_method=DELETE" method="POST">
-                    <button class="delete" type="submit">delete</button>
-                </form>
-            </div>
+    <div class="todo">
+        <div style="align-self:center;"><%= todo.title %></div>
+        <form action="/todo/status/<%= todo.id%>?_method=PUT" method="POST">
+            <input type="hidden" value="<%= (todo.status === 'complete' ? 'incomplete' : 'complete')%>" name="status">
+            <button class="status <%= (todo.status === 'complete' ? 'done' : 'not-done') %>"><%= todo.status%></button>
+        </form>
+        <div class="description"><%= todo.description %></div>
+    </div>
+    <div class="links">
+        <p><%= todo.category %></p>
+        <button class="edit-button">edit</button>
+        <form class="delete" action="/todo/<%= todo.id%>?_method=DELETE" method="POST">
+            <button class="delete" type="submit">delete</button>
+        </form>
+    </div>
+</div>
+<div class="container-view edit <%= (typeof(todo.showedit) !== 'undefined' ? '' : 'nodisplay') %>">
+    <div class="todo">
+    <form class="update" action="/todo/<%= todo.id%>?_method=PUT" method="POST">
+        <div>
+            Title<br>
+            <input type="text" placeholder="title" name="title" value="<%= todo.title %>">
         </div>
+        <div>
+            Category<br>
+            <input type="text" placeholder="category" name="category" value="<%= todo.category %>">
+        </div>
+        <div>
+            Description<br>
+            <textarea name="description"><%= todo.description %></textarea>
+        </div>
+        <input type="hidden" name="id" value="<%= todo.id%>" id="id<%= todo.id%>">
+        <input type="hidden" name="status" value="incomplete">
+        <input type="submit" value="Update!">
+    </form>
+    </div>
+</div>
+
+
 <% include ./partials/end %>

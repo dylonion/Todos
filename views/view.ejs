@@ -3,13 +3,17 @@
     <% todo.forEach(atodo => { %>
         <div class="container-view">
             <div class="todo">
-                <span><%= atodo.title %></span>
-                <span class="status"><%= atodo.status %></span>
+                <div style="align-self:center;"><%= atodo.title %></div>
+                <form action="/todo/status/<%= atodo.id%>?_method=PUT" method="POST">
+                    <input type="hidden" value="<%= (atodo.status === 'complete' ? 'incomplete' : 'complete')%>" name="status">
+                    <button class="status <%= (atodo.status === 'complete' ? 'done' : 'not-done') %>"><%= atodo.status%></button>
+                </form>
             </div>
+            <div class="description nodisplay"><%= atodo.description %></div>
             <div class="links">
                 <p><%= atodo.category %></p>
                 <button class="info"><a href="/todo/<%= atodo.id %>">info</a></button>
-                <button class="edit">edit</button>
+                <button class="edit"><a href="/todo/<%= atodo.id %>?edit=y">edit</a></button>
                 <form class="delete" action="/todo/<%= atodo.id%>?_method=DELETE" method="POST">
                     <button class="delete" type="submit">delete</button>
                 </form>

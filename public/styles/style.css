@@ -1,5 +1,6 @@
 body {
   font-family: sans-serif;
+  color:#4e4e4e;
 }
 .wrapper {
   display: flex;
@@ -76,6 +77,7 @@ a {
   margin: 20px;
   cursor: pointer;
   box-shadow: 3px 2px 3px 0px grey;
+  letter-spacing: 2.2px;
 }
 /*.container button:hover {
   background: linear-gradient(#b9e6b9, white,#b9e6b9);
@@ -86,7 +88,7 @@ a {
   width:300px;
 }
 .container-view button {
-  margin:7px 2px;
+  margin:3px 2px;
   padding:3px;
   box-shadow: none;
   border-radius: 0;
@@ -95,20 +97,22 @@ a {
   box-shadow: 2px 2px 2px grey;
 }
 .container-view .links {
-  text-align: center;
+  display: flex;
+  justify-content: space-between;
   border:1px solid black;
   padding: 0 10px;
+  color:#4e4e4e;
 }
 .container-view .links p {
-  display: inline;
+  align-self: center;
 }
 .todo {
-  padding:10px;
+  padding:5px;
   border:1px solid black;
   border-bottom: none;
-}
-.status {
-  float: right;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
 }
 .description {
   padding: 10px;
@@ -142,6 +146,7 @@ footer {
   border: 1px solid #b5b5b5;
   padding: 5px;
   margin-top: 5px;
+  display: block;
 }
 .container-new input[type="submit"]{
   float: right;
@@ -150,4 +155,15 @@ textarea {
   resize: none;
   width: 97%;
   height: 100px;
+}
+
+.status {
+  margin:0;
+}
+.not-done {
+  background-color: red !important;
+  color:white;
+}
+.done {
+  background-color: #b9e6b9 !important;
 }
