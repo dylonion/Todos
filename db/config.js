@@ -1,21 +1,17 @@
-const options = {
-  query: (e) => {
-    console.log(e.query);
-  }
-};
+const pgp = require('pg-promise')();
 
-const pgp = require('pg-promise')(options);
+let db;
 
-const db = (() => {
-  if (process.env.NODE_ENV === 'development' || !process.env.NODE_ENV) {
-    return pgp({
-      database: 'todolist_tc',
-      port: 5432,
-      host: 'localhost',
-    });
-  } else if (process.env.NODE_ENV === 'production') {
-    return pgp(process.env.DATABASE_URL);
-  }
-})();
+if (process.env.NODE_ENV === 'development' || !process.env.NODE_ENV) {
+  db = pgp({
+  // custom database name
+  database: 'todolist_tc',
+  port: 5432,
+  host: 'localhost',
+  });
+} else if (process.env.NODE_ENV === 'production') {
+  // Heroku will add this
+  db = pgp(process.env.DATABASE_URL);
+}
 
 module.exports = db;
